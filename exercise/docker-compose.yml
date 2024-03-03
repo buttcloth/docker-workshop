@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  backend:
+    build: ./backend
+    environment:
+      - HISTORY_FILE=/data/history.log
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data:/data
+  
+  frontend:
+    build: ./frontend
+    ports:
+      - "8000:3000"
