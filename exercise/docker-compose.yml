@@ -1,15 +1,17 @@
-version: "3.8"
-services:
-  backend:
-    build: ./backend
-    environment:
-      - HISTORY_FILE=/data/history.log
-    ports:
-      - "3000:3000"
+version: "3.8"  # Specifies the version of the Docker Compose file format
+
+services:  # Defines the services (containers) that make up the application
+
+  backend:  # The name of the first service, representing the backend part
+    build: ./backend  # Tells Docker Compose to build the Docker image for this service using the Dockerfile located in the ./backend directory
+    environment:  # Specifies environment variables to be set inside the container
+      - HISTORY_FILE=/data/history.log  # Sets an environment variable named HISTORY_FILE needed for the volume to work
+    ports:  # Maps ports between the container and the host
+      - "3000:3000"  # Binds port 3000 on the host to port 3000 in the container
     volumes:
-      - ./data:/data
+      - ./data:/data  # Mounts the ./data directory from the host to /data inside the container
   
-  frontend:
-    build: ./frontend
+  frontend:  # The name of the second service, representing the frontend part
+    build: ./frontend  # Instructs Docker Compose to build the Docker image for this service using the Dockerfile in the ./frontend directory
     ports:
-      - "8000:3000"
+      - "8000:3000"  # Maps port 8000 on the host to port 3000 in the container. This allows access to the frontend by visiting http://localhost:8000 on browser
